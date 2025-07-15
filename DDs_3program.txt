@@ -1,0 +1,79 @@
+#include <iostream>
+#include<stack>
+#include<string>
+using namespace std;
+bool isDigit(char c){
+    return c>='1'&& c<='9';
+}
+//return precedence of operators
+int priority(char op){
+    if(op=='+'|| op=='-')return 1;
+    if(op=='*'|| op=='/')return 2;
+    return 0;
+}
+//main function to convert infix to postfix
+string infixToPostfix(string infix){
+    stack<char>st;
+    string postfix="";
+    
+    for(size_t i=0;i<infix.length();){
+        char c=infix[i];
+        cout<<"working on character:"<<c<<endl;
+        if(isDigit(c)){
+            postfix +=c;
+            i++;
+        }
+        else if(c=='('){
+            st.push(c);
+            i++;
+        }
+        else if(c==')'){
+            while(!st.empty()){
+                char top=st.top();st.pop();
+                if(top=='(')break;
+                postfix += top;
+            }
+            i++;
+            
+        }
+        else if(st.empty() || priority(c) > priority(st.top())){
+            st.push(c);
+            i++;
+        }
+        else{
+            postfix += st.top();
+            st.pop();
+            //i not incremented here-will retry current character
+        }
+        
+    }
+    while(!st.empty()){
+        postfix +=st.top();
+        st.pop();
+    }
+    return postfix;
+}
+int main(){
+    string infix;
+    cout<<"enter infix expression:";
+    cin>>infix;
+    string postfix= infixToPostfix(infix);
+    cout<<"final postfix expression:"<<postfix<<endl;
+    return 0;
+}
+
+
+
+
+
+
+
+
+output---------
+enter infix expression:2+3*4
+working on character:2
+working on character:+
+working on character:3
+working on character:*
+working on character:4
+final postfix expression:234*+
