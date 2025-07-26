@@ -1,0 +1,89 @@
+#include<iostream>
+using namespace std;
+//node structure 
+struct Node{
+    int data;
+    Node *next;
+};
+
+//head pointer
+Node* head=NULL;
+//insert at beginning
+void insertAtBeginning(int value){
+    Node *newNode=new Node();
+    newNode->data=value;
+    newNode->next=head;
+    head=newNode;
+}
+//insert at end
+void insertAtEnd(int value){
+    Node *newNode=new Node();
+    newNode->data=value;
+    newNode->next=NULL;
+    
+    if(head==NULL){
+        head=newNode;
+        return;
+    }
+    Node* temp=head;
+    while(temp->next!=NULL){
+        temp=temp->next;
+    }
+    temp->next=newNode;
+}
+
+//insert at specific position
+void insertAtPosition(int value,int position){
+    if(position<1){
+        cout<<"invalid position!"<<endl;
+        return;
+    }
+    if(position==1){
+        insertAtBeginning(value);
+        return;
+    }
+    Node* newNode=new Node();
+    newNode->data=value;
+    
+    Node* temp=head;
+    for(int i=1;i<position-1;i++){
+        if(temp==NULL){
+            cout<<"position out of range!"<<endl;
+            return;
+        }
+        temp=temp->next;
+    }
+    if(temp==NULL){
+        cout<<"position out of range!"<<endl;
+        return;
+    }
+    newNode->next=temp->next;
+    temp->next=newNode;
+}
+
+//display list 
+void display(){
+    Node *temp=head;
+    while(temp!=NULL){
+        cout<<temp->data<<"->";
+        temp=temp->next;
+    }
+    cout<<"NULL"<<endl;
+}
+//main function
+int main(){
+    insertAtBeginning(10);
+    insertAtEnd(20);
+    insertAtPosition(15,2);
+    insertAtPosition(5,1);
+    insertAtEnd(25);
+    
+    cout<<"linked list:";
+    display();
+    
+    return 0;
+}
+----------------------------------------------------
+output-
+
+linked list:5->10->15->20->25->NULL
