@@ -1,0 +1,76 @@
+#include<stdio.h>
+#define SIZE 100
+int queue[SIZE];
+int front=-1, rear=-1;
+
+void enqueue(int value){
+    if(rear==SIZE-1){
+        printf("queue is full(overflow)\n");
+        return;
+    }
+    if(front==-1)
+    front=0;
+    rear++;
+    queue[rear]=value;
+    printf("%d enqueued to queue.\n",value);
+}
+
+void dequeue(){
+    if(front==-1||front>rear){
+        printf("queue is empty(underflow).\n");
+        return;
+    }
+    printf("%d dequeued from queue.\n",queue[front]);
+    front++;
+}
+
+void display(){
+    if(front==-1||front>rear){
+        printf("queue is empty.\n");
+        return;
+    }
+    printf("queue elements are:");
+    for(int i=front;i<=rear;i++){
+        printf("%d",queue[i]);
+    }
+    printf("\n");
+}
+
+void peek(){
+    if(front==-1||front>rear){
+        printf("queue is empty(nothing to peek).\n");
+    }else{
+        printf("front element is:%d\n",queue[front]);
+    }
+}
+void search(int value){
+    if(front==-1||front>rear){
+        printf("queue is empty(nothing tosearch).\n");
+        return;
+    }
+    for(int i=front;i<=rear;i++){
+        if(queue[i]==value){
+            printf("%d found at position %d in queue.\n",value,i-front);
+            return;
+        }
+    }
+    printf("%d not foun in queue.\n",value);
+}
+
+int main(){
+    enqueue(10);
+    enqueue(20);
+    enqueue(30);
+    display();
+    peek();
+    search(20);
+    search(40);
+    dequeue();
+    display();
+    peek();
+    dequeue();
+    dequeue();
+    
+    return 0;
+}
+
