@@ -1,0 +1,39 @@
+#include <iostream>
+using namespace std;
+
+int f = 1;
+
+void fact(int n) {
+    if (n <= 0) return;  // Base case to stop recursion
+    cout << "f=" << f << " and n=" << n << endl;
+    f = f * n;
+    fact(n - 1);
+}
+
+int main() {
+    int k;
+    cout << "Given value for factorial calculation: ";
+    cin >> k;
+    fact(k);
+    cout << "Factorial is " << f << endl;
+    return 0;
+}
+----------------------------------------------------
+output-
+Given value for factorial calculation: 15
+f=1 and n=15
+f=15 and n=14
+f=210 and n=13
+f=2730 and n=12
+f=32760 and n=11
+f=360360 and n=10
+f=3603600 and n=9
+f=32432400 and n=8
+f=259459200 and n=7
+f=1816214400 and n=6
+f=-1987615488 and n=5
+f=-1348142848 and n=4
+f=-1097604096 and n=3
+f=1002155008 and n=2
+f=2004310016 and n=1
+Factorial is 2004310016
