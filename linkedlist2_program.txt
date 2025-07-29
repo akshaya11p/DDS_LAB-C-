@@ -1,0 +1,107 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct Node {
+    int val;
+    struct Node* next;
+} Node;
+
+Node* start = NULL;
+
+Node* getNode() {
+    Node* p = (Node*)malloc(sizeof(Node));
+    if (p == NULL) {
+        printf("Memory allocation failed\n");
+        exit(1);
+    }
+    printf("Give value for new Node: ");
+    scanf("%d", &(p->val));
+    p->next = NULL;
+    return p;
+}
+
+void traverse() {
+    Node* p = start;
+    printf("The linked list:\n");
+    while (p != NULL) {
+        printf("%d\t", p->val);
+        p = p->next;
+    }
+    printf("\n");
+}
+
+int main() {
+    start = getNode();
+    start->next = getNode();
+    start->next->next = getNode();
+    start->next->next->next = getNode();
+    start->next->next->next->next = getNode();
+
+    traverse();
+
+    return 0;
+}
+--------------------------------------------------------------------------------------
+output:
+Give value for new Node: 2
+Give value for new Node: 4
+Give value for new Node: 6
+Give value for new Node: 7
+Give value for new Node: 8
+The linked list:
+2	4	6	7	8	
+------------------------------------------------------------------------------------------
+C++
+-----------------------------------------------------------------------
+#include <iostream>
+using namespace std;
+
+struct Node {
+    int val;
+    Node* next;
+};
+
+Node* start = nullptr;
+
+Node* getNode() {
+    Node* p = new Node;
+    if (p == nullptr) {
+        cout << "Memory allocation failed" << endl;
+        exit(1);
+    }
+    cout << "Give value for new Node: ";
+    cin >> p->val;
+    p->next = nullptr;
+    return p;
+}
+
+void traverse() {
+    Node* p = start;
+    cout << "The linked list:" << endl;
+    while (p != nullptr) {
+        cout << p->val << "\t";
+        p = p->next;
+    }
+    cout << endl;
+}
+
+int main() {
+    start = getNode();
+    start->next = getNode();
+    start->next->next = getNode();
+    start->next->next->next = getNode();
+    start->next->next->next->next = getNode();
+
+    traverse();
+
+    return 0;
+}
+---------------------------------------------------------------------------------
+output:
+Give value for new Node: 2
+Give value for new Node: 3
+Give value for new Node: 5
+Give value for new Node: 7
+Give value for new Node: 8
+The linked list:
+2	3	5	7	8	
